@@ -1,7 +1,9 @@
 
 OTHELLO
 README - gyg2104 (Gracie Gilbert)
-readme_gyg2104.txt
+This is an Othello game created for AI class.
+
+
 PART 1:
 I used the same heuristic for both, which is that I have an ideal board
 weighting stored in an array from initialization, and then I compare the

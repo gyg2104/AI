@@ -1,3 +1,5 @@
+
+OTHELLO
 README - gyg2104 (Gracie Gilbert)
 readme_gyg2104.txt
 PART 1:

@@ -1,0 +1,137 @@
+UNI: gyg2104
+Name: Gracie Gilbert
+
+HW 1 - Random Sentence Generator
+
+Part 1: 
+I added non-terminal symbols, used this way:
+-Adjective (to describe singular nouns) ie "The fat man ran fast" where "fat"
+is the adjective
+-AdjectivePlur (to describe plural nouns) ie "I saw him on several
+occasions" where "several" is a plural adjective
+-Adverb (to modify verbs) ie "I did not go" where "not" modifies did
+-ArticleS (singular articles that help to make a noun specified) ie "The dog
+ran" where "the" is the singular article
+-AuxVerbPres (to be the auxillary to another verb) ie "She must go there"
+where "must" is the auxillary present-tense verb
+-ConjunctionCoord and ConjunctionSub (linking words, phrases) ie "I like tea and
+coffee" where "and" is a coordinating conjunction or "Whether she goes is a
+mystery" where "whether" is a subordinate conjunction
+-PluralPresHelpVerb and PluralPastHelpVerb (helping verbs work with main
+verb to describe action) ie "They were chasing dogs" where "were" is a
+plural past help verb or "They are chasing dogs" where "are" is a present
+plural help verb
+-PronounExpletive and PronounReflexive (reflexive to refer to subject of
+sentence, expletive as a "dummy" pronoun that is just syntactically
+required) ie "It is raining" where "it is an expletive pronoun or "John
+doesn't trust himself" where "himself is a reflexive pronoun
+-PluralNoun and SingularNoun (as opposed to just having a noun because there
+are times when we needed to talk about multiples) ie "I like dogs" where
+"dogs" is a plural noun vs "I like the dog" where "dog" is a singular noun
+-Premod (to premodify a preposition) ie "There were many people such as
+Jessica and Adam" where "such" premodifies the preposition "as"
+-Preposition (to express spatial relationships, to form phrases to modify
+other parts of speech) ie "He was in the bedroom" where "in" is a
+preposition
+-RelativePronoun (to mark a relative clause) ie "The guy that you saw
+yesterday was Jack" where "that" is the relative pronoun and the relative
+clause would be "you saw yesterday"
+-SingPastTransVerb and SingPresTransVerb (the singular past/present verbs
+that are action verbs with direct objects) ie "I pay him twenty dollars"
+where "pay" is the sing. pres transive verb or "I paid him twenty dollar"
+for the past tense
+
+I added production rules, show below:
+-singularnoun-phrase (so that there would be a way to have an entire phrase
+to represent a noun where all of it agrees) ie "The big dog" or "A man" all
+have adjectives and articles that agree with the singular noun
+-pluralnoun-phrase (same idea as above except plural) ie "Several dogs"
+because we choose the plural forms of words to make noun phrases
+-pluralverb-phrase (so that when making a plural sentence the verb agrees
+with the rest) ie saying "The dogs run fast" instead of "The dogs runs fast"
+-singularverb-phrase (same idea as above except singular) ie "I must seek a
+job" where the singular verb phrase is "must seek a job"
+-pluraladj-phrase (in order to have adjective phrases that can be used in a
+a plural verb phrase for example but that will have correct agreement) ie
+"They should be able to go" where the plural adj phrase is "able to go" in
+order to describe what they should be
+-plurprep-phrase (in order to have a prepositional phrase for plurals) ie
+"He went to several stores" where the prep phrase is "to several stores"
+-relplur-clause (in order to have relative clauses that can use a relative
+pronoun) ie "I like the paintings that hang there" where the plural relative clause
+is "that hang there" 
+
+
+Part 2: 
+Rule 1 - outputs (HIGHER EDUCATION MUST COUNTER THE PREVAILING NARRATIVE OF
+POLARIZATION)
+(defparameter rules1 '((sentence 0) (singularnoun-phrase 0) (Adjective 0) (SingularNoun 0) (singularverb-phrase 0) (AuxVerbPres 0)(SingPresTransVerb 0)
+                                    (singularnoun-phrase 1) (ArticleS 0) (singularnoun-phrase 0) (Adjective 1) (SingularNoun 1) 
+                                    (singularprep-phrase 0) (Preposition 0) (SingularNoun 2)))
+
+
+
+Rule 2 - outputs (THIS FLAWED STRATEGY WILL HARDLY ACHIEVE THE DESIRED
+INTENT)
+(defparameter rules2 '((sentence 0) (singularnoun-phrase 2) (ArticleS 1) (Adjective 2) (SingularNoun 3) (singularverb-phrase 1)
+                                    (AuxVerbPres 1) (Adverb 0) (SingPresTransVerb 1) (singularnoun-phrase 2) (ArticleS 0) 
+                                    (Adjective 3) (SingularNoun 4)))
+
+
+
+Rule 3 - outputs (THERE WERE SOLID JOB GAINS IN SEVERAL INDUSTRIES THAT TEND
+TO PAY WELL SUCH AS BUSINESS AND PROFESSIONAL SERVICES AND HEALTH CARE)
+(defparameter rules3 '((sentence 1) (PronounExpletive 0) (pluralverb-phrase 0) (PluralPastHelpVerb 0) (pluralnoun-phrase 0) 
+                                    (singularnoun-phrase 0) (Adjective 4) (SingularNoun 5) (PluralNoun 0) (plurprep-phrase 0) 
+                                    (Preposition 2) (pluralnoun-phrase 2) (pluralnoun-phrase 1) (AdjectivePlur 0) (PluralNoun 1) 
+                                    (relplur-clause 0) (RelativePronoun 0) (pluralverb-phrase 1) (SingPresTransVerb 2)
+                                    (pluralverb-phrase 2) (Preposition 3) (SingPresTransVerb 3) (Adverb 1) (singularprep-phrase 1)
+                                    (Premod 0) (Preposition 4) (pluralnoun-phrase 3) (singularnoun-phrase 3) (SingularNoun 6)
+                                    (ConjunctionCoord 0) (pluralnoun-phrase 4) (pluralnoun-phrase 5) (Adjective 5) (PluralNoun 2)
+                                    (ConjunctionCoord 0) (singularnoun-phrase 4) (singularnoun-phrase 3) (SingularNoun 7) (SingularNoun 8)))
+
+Rule 4: Outputs (THE ASTEROID WILL NOT BE VISIBLE TO THE NAKED EYE BUT
+AMATEUR ASTRONOMERS SHOULD BE ABLE TO SEE IT WITH TELESCOPES)
+(defparameter rules4 '((sentence 2) (singularnoun-phrase 5) (ArticleS 0) (SingularNoun 9) (singularverb-phrase 1) (AuxVerbPres 1) 
+                                    (Adverb 2) (SingPresTransVerb 4) (singularnoun-phrase 6) (Adjective 6) (Preposition 3) 
+                                    (singularnoun-phrase 2) (ArticleS 0) (Adjective 7) (SingularNoun 10) (ConjunctionCoord 1) 
+                                    (pluralnoun-phrase 5) (Adjective 8) (PluralNoun 3) (pluralverb-phrase 3) (AuxVerbPres 2)
+                                    (PluralPresHelpVerb 0) (pluraladj-phrase 0) (Adjective 9) (Preposition 3) (pluralverb-phrase 4)
+                                    (pluralverb-phrase 5) (SingPresTransVerb 5) (PronounReflexive 0) (plurprep-phrase 0) 
+                                    (Preposition 5) (pluralnoun-phrase 6) (PluralNoun 4)))
+
+
+Rule 5: outputs (WHETHER THE PROSECUTION WILL SEEK THE DEATH PENALTY IN THE
+CASE WILL BE DECIDED IN A FEW WEEKS)
+(defparameter rules5 '((sentence 0) (singularnoun-phrase 7) (ConjunctionSub 0) (singularnoun-phrase 5) (ArticleS 0) (SingularNoun 11)
+                                    (singularverb-phrase 0) (AuxVerbPres 1) (SingPresTransVerb 6) (singularnoun-phrase 1)
+                                    (ArticleS 0) (singularnoun-phrase 4) (singularnoun-phrase 3) (SingularNoun 12) (SingularNoun 13)
+                                    (singularprep-phrase 2) (Preposition 2) (singularnoun-phrase 5) (ArticleS 0) (SingularNoun 14)
+                                    (singularverb-phrase 2) (AuxVerbPres 1) (PluralPresHelpVerb 0) (SingPastTransVerb 0)
+                                    (plurprep-phrase 0) (Preposition 2) (pluralnoun-phrase 7) (ArticleS 2) (AdjectivePlur 1)
+                                    (PluralNoun 5)))
+
+
+Part 3:
+*PLEASE NOTE THAT I USED TWO FUNCTIONS FROM THE BOOK THAT WERE NOT
+ORIGINALLY IN THE GRAMMAR.LISP BUT THAT NORVIG HAD SO I ASSUMED IT WAS OK.
+THESE METHODS ARE generate-all AND combine-all
+
+*Also because I used the t.a.'s function to write to a file, I only produce
+1 file, that I labeled as q2_gyg2104.txt
+
+-my generateValid will generate a valid sentence
+-the t.a. provided code does the combining with +/- of the sentences into
+one file
+-My additional two criteria are first to reject any sentence where there are
+two articles next to each other, for example "The the dog ran", and then to
+reject any sentence where there are too many coordinating conjunctions (no more than
+three coordinating conjunctions allowed)
+-I reject sentences that are too long, and set the "max length" to 30
+-I reject words where the same word appears twice except for if it is an
+article, conjunction (any type), preposition, or auxillary verb as these are
+things that can be used multiple times in a sentence
+-Although I understood in theory how to do the max depth tree thing, I
+couldn't figure out how to implement it so I didn't do that part
+
+

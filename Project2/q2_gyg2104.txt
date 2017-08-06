@@ -1,0 +1,98 @@
+q2_gyg2104.txt
+PART 3:
+a and b) Number of Nodes Generated // Number of Duplicate Nodes
+To test the number of nodes generated, in both the minimax search and the alpha-beta search, I created a hash table that checked for whether or not the node had been seen already - if not, then it adds the node with a val of 1, if yes, then it updates the counter of that hashed node by 1. 
+
+For regular minimax at depth 4:
+TIME 1: 34898 unique, duplicate 185699
+TIME 2: 107930 unique, 66637 dup
+TIME 3: 41429 unique, 278473 dup
+TIME 4: 39859 unique, 191902 dup
+TIME 5: 20667 unique, 122945 dup
+TIME 6: 14874 unique, 79327 dup
+TIME 7: 53335 unique, 285664 dup
+TIME 8: 23229 unique, 95945 dup
+TIME 9: 18719 unique, 93517 dup
+TIME 10: 35640 unique, 236147 dup
+
+Alpha beta used the following code twice within the alpha beta algorithm
+once in each side of the color if/else checking statement, whereas the code was
+used only once to do the minimax checking:
+l = [b.get_squares(color), b.get_squares(-color)]
+tup = tuple(tuple(i) for i in l)
+if self.node_gen.has_key(tup):
+    self.node_gen[tup] = self.node_gen[tup] + 1
+else:
+    self.node_gen[tup] = 1
+
+
+and then used the following to print it out after doing alpha beta/minimax
+
+
+print len(self.node_gen.keys()) #number of nodes
+for x in self.node_gen:
+    if self.node_gen[x] > 1:
+        nodes_revisited = nodes_revisited + self.node_gen[x] - 1
+print nodes_revisited #number of revisited
+
+where the self.node_gen was a dictionary that I created during the __init__
+
+For the alpha beta search at depth 5, the following values were found in 10 runs:
+TIME 1: 137290 unique nodes, 40414 revisited
+TIME 2: 93793 unique nodes, 31261 revisited
+TIME 3: 126401 unique nodes, 52962 revisited
+TIME 4: 108731 unique nodes, 37744 revisited
+TIME 5: 145577 unique nodes, 27836 revisited
+TIME 6: 157985 unique nodes, 26446 revisited
+TIME 7: 109354 unique nodes, 14996 revisited
+TIME 8: 204762 unique nodes, 44915 revisited
+TIME 9: 188098 unique nodes, 39882 revisited
+TIME 10: 194231 unique nodes, 32211 revisited
+
+c) Average Branching Factor
+The average branching factor is the number of possible legal moves at each turn. I found the average branching factor to be 10.5 when I ran the program, although 
+I looked it up online and I believe the avg branching factor of Othello should really be 10… Close enough I guess?
+Anyway, this is the code that I used to figure this out:
+In __init__, I created an array called self.branch_factor, which I later used 
+in get_move right before doing alpha beta/minimax each turn by using the code
+moves = board.get_legal_moves(color)
+self.branch_factor.append(len(moves))
+
+
+And then later you can see the array of all of the different branch factors by
+print self.branch_factor
+Then I took all of these values and averaged them using a calculator. 
+
+BUT THEN - I saw on piazza that you wanted it done for every node created -
+used the same code, but just put it so that it was when looking at the
+possible moves of the possible boards within the algorithms themselves.
+Anyway, the avg branching factor here came out to 10.2 in one run
+
+d) Runtime of Algorithms
+Below are the avg of 10 games for each depth, which I got by looking at how much
+time was left over after a game ended and after each move and then average
+time a full game took after the 10 games and the time each move took. First listed is for the whole game,
+second is for one iteration of get_move
+MINIMAX:
+depth 1 - 0 seconds (almost instant calculation every time), 0 sec avg move
+depth 2 - .6 seconds, .02 sec avg move
+depth 3 - 4.1 seconds, .14 sec avg move
+depth 4 - 51.2 seconds, 1.72 sec avg move
+depth 5 - took forever x 10, ugh. 542.2 seconds, 18.7 sec avg move
+By the time I got to depth 6 it took far too long to run -  I waited over a 
+half hour twice and then gave up because it had only made it to round 6 the first
+try and round 7 the second time I tried it 
+
+ALPHA-BETA:
+depth 1 - 0 seconds (almost instant calculation every time), 0 sec avg move
+depth 2 - .1 seconds, .003 sec avg 
+depth 3 - 3.2 seconds, .12 sec avg
+depth 4 - 12.8 seconds, .43 sec avg
+depth 5 - 54.7 seconds (this is if I don’t put in the condition that if 
+it gets too close to 60 s to just pick a random move, which I ended up 
+adding because every now and then it is over 60 s), 1.83 sec avg
+depth 6 - 336.4 seconds, 11.2 sec avg
+
+As you can see, at the beginning the difference in speeds isn’t really all too much, but as you get to deeper and deeper depths, the difference in runtimes
+becomes incredibly pronounced - alpha-beta ends up with a much shorter runtime 
+whereas it becomes a huge chore to even run the minimax. 
